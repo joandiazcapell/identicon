@@ -25,19 +25,17 @@ defmodule Identicon do
   end
 
   @doc """
-    Returns the r,g,b numbers for the identicon's color
+    Returns the r,g,b numbers for the identicon's color and the hex numbers
 
     ## Examples
 
       iex> image = Identicon.hash_input("banana")
       iex> Identicon.pick_color(image)
-      [114, 179, 2]
+      %Identicon.Image{hex: [114, 179, 2, 191, 41, 122, 34, 138, 117, 115, 1, 35, 239, 239, 124, 65], color: {114, 179, 2}}
 
   """
-  def pick_color(image) do
-    %Identicon.Image{hex: [r,g, b | _tail]} = image
-
-    [r,g,b]
+  def pick_color(%Identicon.Image{hex: [r, g, b | _tail]} = image) do
+    %Identicon.Image{image | color: {r, g, b}}
   end
 
 end
